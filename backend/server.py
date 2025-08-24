@@ -1,14 +1,15 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field
-from typing import List
+from pydantic import BaseModel, Field, EmailStr, validator
+from typing import List, Optional
 import uuid
 from datetime import datetime
+import re
 
 
 ROOT_DIR = Path(__file__).parent
@@ -20,13 +21,81 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(title="Spacio+ API", description="API for Spacio+ cleaning service website")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
 
-# Define Models
+# Define Models for Spacio+ Contact System
+class ContactRequest(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    nom: str = Field(..., min_length=2, max_length=100)
+    email: EmailStr
+    telephone: Optional[str] = Field(None, max_length=20)
+    typeService: str = Field(..., description="Type de service demandé")
+    message: Optional[str] = Field(None, max_length=1000)
+    dateCreation: datetime = Field(default_factory=datetime.utcnow)
+    statut: str = Field(default="nouveau")
+    notes: Optional[str] = Field(None, max_length=500)
+
+    @validator('typeService')
+    def validate_type_service(cls, v):
+        valid_services = ['residentiel', 'commercial', 'apres-travaux', 'assainissement']
+        if v not in valid_services:
+            raise ValueError(f'Type de service doit être un de: {", ".join(valid_services)}')
+        return v
+
+    @validator('telephone')
+    def validate_telephone(cls, v):
+        if v:
+            # Remove spaces, parentheses, and dashes for validation
+            clean_phone = re.sub(r'[\s\-\(\)]', '', v)
+            if not re.match(r'^\+?[\d]{10,15}$', clean_phone):
+                raise ValueError('Format de téléphone invalide')
+        return v
+
+    @validator('nom')
+    def validate_nom(cls, v):
+        if not v.strip():
+            raise ValueError('Le nom ne peut pas être vide')
+        return v.strip().title()
+
+class ContactRequestCreate(BaseModel):
+    nom: str = Field(..., min_length=2, max_length=100)
+    email: EmailStr
+    telephone: Optional[str] = Field(None, max_length=20)
+    typeService: str = Field(..., description="Type de service demandé")
+    message: Optional[str] = Field(None, max_length=1000)
+
+    @validator('typeService')
+    def validate_type_service(cls, v):
+        valid_services = ['residentiel', 'commercial', 'apres-travaux', 'assainissement']
+        if v not in valid_services:
+            raise ValueError(f'Type de service doit être un de: {", ".join(valid_services)}')
+        return v
+
+    @validator('telephone')
+    def validate_telephone(cls, v):
+        if v:
+            clean_phone = re.sub(r'[\s\-\(\)]', '', v)
+            if not re.match(r'^\+?[\d]{10,15}$', clean_phone):
+                raise ValueError('Format de téléphone invalide')
+        return v
+
+    @validator('nom')
+    def validate_nom(cls, v):
+        if not v.strip():
+            raise ValueError('Le nom ne peut pas être vide')
+        return v.strip().title()
+
+class ContactResponse(BaseModel):
+    success: bool
+    message: str
+    data: Optional[dict] = None
+    errors: Optional[List[str]] = None
+
+# Legacy Status Check Models (keeping for compatibility)
 class StatusCheck(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
@@ -38,8 +107,89 @@ class StatusCheckCreate(BaseModel):
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Spacio+ API - Service de nettoyage professionnel"}
 
+# Spacio+ Contact Routes
+@api_router.post("/contact", response_model=ContactResponse)
+async def create_contact_request(contact_data: ContactRequestCreate):
+    """Créer une nouvelle demande de contact/devis pour Spacio+"""
+    try:
+        # Create the contact request object
+        contact_request = ContactRequest(**contact_data.dict())
+        
+        # Insert into database
+        result = await db.contact_requests.insert_one(contact_request.dict())
+        
+        if result.inserted_id:
+            return ContactResponse(
+                success=True,
+                message="Demande de contact envoyée avec succès! Nous vous répondrons dans les 24h.",
+                data={
+                    "id": contact_request.id,
+                    "nom": contact_request.nom,
+                    "dateCreation": contact_request.dateCreation.isoformat()
+                }
+            )
+        else:
+            raise HTTPException(status_code=500, detail="Erreur lors de l'enregistrement")
+            
+    except ValueError as ve:
+        return ContactResponse(
+            success=False,
+            message="Données invalides",
+            errors=[str(ve)]
+        )
+    except Exception as e:
+        logging.error(f"Error creating contact request: {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur interne du serveur")
+
+@api_router.get("/contact", response_model=List[ContactRequest])
+async def get_contact_requests():
+    """Récupérer toutes les demandes de contact (pour usage administratif)"""
+    try:
+        contacts = await db.contact_requests.find().sort("dateCreation", -1).to_list(100)
+        return [ContactRequest(**contact) for contact in contacts]
+    except Exception as e:
+        logging.error(f"Error fetching contact requests: {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur lors de la récupération des données")
+
+@api_router.get("/contact/stats")
+async def get_contact_stats():
+    """Statistiques des demandes de contact par type de service"""
+    try:
+        pipeline = [
+            {
+                "$group": {
+                    "_id": "$typeService",
+                    "count": {"$sum": 1}
+                }
+            },
+            {
+                "$project": {
+                    "typeService": "$_id",
+                    "count": 1,
+                    "_id": 0
+                }
+            }
+        ]
+        
+        stats = await db.contact_requests.aggregate(pipeline).to_list(None)
+        
+        total_requests = await db.contact_requests.count_documents({})
+        
+        return {
+            "success": True,
+            "data": {
+                "total_requests": total_requests,
+                "by_service": stats,
+                "last_updated": datetime.utcnow().isoformat()
+            }
+        }
+    except Exception as e:
+        logging.error(f"Error fetching contact stats: {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur lors de la récupération des statistiques")
+
+# Legacy Status Check Routes (keeping for compatibility)
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     status_dict = input.dict()
