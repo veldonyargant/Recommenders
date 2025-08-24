@@ -52,11 +52,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 to-emerald-50">
+    <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">
+          <Badge className="bg-blue-100 text-brand-blue hover:bg-blue-100 mb-4">
             Contactez-nous
           </Badge>
           <h2 className="text-4xl font-bold text-gray-900 mb-6">
@@ -74,7 +74,7 @@ const Contact = () => {
             <Card className="shadow-xl border-0 bg-white">
               <CardHeader>
                 <CardTitle className="text-2xl text-gray-900 flex items-center gap-2">
-                  <MessageSquare className="h-6 w-6 text-emerald-600" />
+                  <MessageSquare className="h-6 w-6 text-brand-blue" />
                   Demande de Devis Gratuit
                 </CardTitle>
                 <p className="text-gray-600">
@@ -95,7 +95,7 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="Votre nom et prénom"
                         required
-                        className="border-gray-200 focus:border-emerald-500"
+                        className="border-gray-200 focus:border-brand-blue"
                       />
                     </div>
                     <div>
@@ -109,7 +109,7 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="votre@email.com"
                         required
-                        className="border-gray-200 focus:border-emerald-500"
+                        className="border-gray-200 focus:border-brand-blue"
                       />
                     </div>
                   </div>
@@ -125,7 +125,7 @@ const Contact = () => {
                         value={formData.telephone}
                         onChange={handleChange}
                         placeholder="(819) 555-0123"
-                        className="border-gray-200 focus:border-emerald-500"
+                        className="border-gray-200 focus:border-brand-blue"
                       />
                     </div>
                     <div>
@@ -137,7 +137,7 @@ const Contact = () => {
                         value={formData.typeService}
                         onChange={handleChange}
                         required
-                        className="w-full p-3 border border-gray-200 rounded-md focus:border-emerald-500 focus:outline-none"
+                        className="w-full p-3 border border-gray-200 rounded-md focus:border-brand-blue focus:outline-none"
                       >
                         <option value="">Sélectionnez un service</option>
                         <option value="residentiel">Nettoyage Résidentiel</option>
@@ -158,19 +158,19 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Décrivez votre projet : superficie, fréquence souhaitée, exigences particulières..."
                       rows={4}
-                      className="border-gray-200 focus:border-emerald-500"
+                      className="border-gray-200 focus:border-brand-blue"
                     />
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm text-gray-600 bg-emerald-50 p-3 rounded-lg">
-                    <CheckCircle className="h-4 w-4 text-emerald-600 flex-shrink-0" />
+                  <div className="flex items-center gap-2 text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
+                    <CheckCircle className="h-4 w-4 text-brand-green flex-shrink-0" />
                     <span>Réponse garantie sous 24h • Devis gratuit • Sans engagement</span>
                   </div>
 
                   <Button 
                     type="submit" 
                     size="lg"
-                    className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-4"
+                    className="w-full bg-brand-gradient hover:bg-brand-gradient text-white font-semibold py-4 hover:scale-105 transition-all duration-300"
                   >
                     Envoyer ma Demande
                   </Button>
@@ -188,7 +188,7 @@ const Contact = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-emerald-600 mt-1 flex-shrink-0" />
+                  <MapPin className="h-5 w-5 text-brand-blue mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-gray-900">Adresse</div>
                     <div className="text-gray-600 text-sm">{contactInfo.address}</div>
@@ -196,7 +196,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <Phone className="h-5 w-5 text-emerald-600 flex-shrink-0" />
+                  <Phone className="h-5 w-5 text-brand-green flex-shrink-0" />
                   <div>
                     <div className="font-medium text-gray-900">Téléphone</div>
                     <div className="text-gray-600 text-sm">{contactInfo.phone}</div>
@@ -204,7 +204,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <Mail className="h-5 w-5 text-emerald-600 flex-shrink-0" />
+                  <Mail className="h-5 w-5 text-brand-blue flex-shrink-0" />
                   <div>
                     <div className="font-medium text-gray-900">Email</div>
                     <div className="text-gray-600 text-sm">{contactInfo.email}</div>
@@ -212,7 +212,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="flex items-start gap-3">
-                  <Clock className="h-5 w-5 text-emerald-600 mt-1 flex-shrink-0" />
+                  <Clock className="h-5 w-5 text-brand-green mt-1 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-gray-900">Horaires</div>
                     <div className="text-gray-600 text-sm">
@@ -226,19 +226,19 @@ const Contact = () => {
             </Card>
 
             {/* Service Areas Card */}
-            <Card className="shadow-lg border-0 bg-gradient-to-br from-emerald-600 to-teal-600 text-white">
+            <Card className="shadow-lg border-0 bg-brand-gradient text-white">
               <CardHeader>
                 <CardTitle className="text-xl">Zones de Service</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 text-emerald-100">
+                <p className="mb-4 text-blue-100">
                   Nous desservons toute la région Ottawa-Gatineau :
                 </p>
                 <div className="space-y-2">
                   {companyInfo.serviceAreas.map((area, index) => (
                     <div key={index} className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-emerald-200" />
-                      <span className="text-emerald-100">{area}</span>
+                      <CheckCircle className="h-4 w-4 text-green-200" />
+                      <span className="text-blue-100">{area}</span>
                     </div>
                   ))}
                 </div>

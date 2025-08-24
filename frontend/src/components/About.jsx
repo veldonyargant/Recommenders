@@ -12,11 +12,11 @@ const About = () => {
   };
 
   return (
-    <section id="apropos" className="py-20 bg-gradient-to-br from-slate-50 to-emerald-50">
+    <section id="apropos" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 mb-4">
+          <Badge className="bg-blue-100 text-brand-blue hover:bg-blue-100 mb-4">
             À Propos de Nous
           </Badge>
           <h2 className="text-4xl font-bold text-gray-900 mb-6">
@@ -51,8 +51,8 @@ const About = () => {
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Nos Valeurs</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <Award className="h-5 w-5 text-emerald-600" />
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Award className="h-5 w-5 text-brand-blue" />
                   </div>
                   <div>
                     <div className="font-medium text-gray-900">Professionnalisme</div>
@@ -60,8 +60,8 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <CheckCircle className="h-5 w-5 text-emerald-600" />
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-5 w-5 text-brand-green" />
                   </div>
                   <div>
                     <div className="font-medium text-gray-900">Intégrité</div>
@@ -69,8 +69,8 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <Users className="h-5 w-5 text-emerald-600" />
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Users className="h-5 w-5 text-brand-blue" />
                   </div>
                   <div>
                     <div className="font-medium text-gray-900">Respect</div>
@@ -78,8 +78,8 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                    <Leaf className="h-5 w-5 text-emerald-600" />
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                    <Leaf className="h-5 w-5 text-brand-green" />
                   </div>
                   <div>
                     <div className="font-medium text-gray-900">Innovation</div>
@@ -100,19 +100,19 @@ const About = () => {
                 </h4>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 mb-1">100+</div>
+                    <div className="text-3xl font-bold text-brand-blue mb-1">100+</div>
                     <div className="text-sm text-gray-600">Clients Satisfaits</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 mb-1">98%</div>
+                    <div className="text-3xl font-bold text-brand-green mb-1">98%</div>
                     <div className="text-sm text-gray-600">Taux de Satisfaction</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 mb-1">5★</div>
+                    <div className="text-3xl font-bold text-brand-blue mb-1">5★</div>
                     <div className="text-sm text-gray-600">Note Moyenne</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 mb-1">24h</div>
+                    <div className="text-3xl font-bold text-brand-green mb-1">24h</div>
                     <div className="text-sm text-gray-600">Réponse Garantie</div>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ const About = () => {
             </Card>
 
             {/* Vision Card */}
-            <Card className="bg-gradient-to-br from-emerald-600 to-teal-600 text-white border-0">
+            <Card className="bg-brand-gradient text-white border-0">
               <CardContent className="p-8">
                 <h4 className="text-xl font-semibold mb-4">Notre Vision</h4>
                 <p className="leading-relaxed mb-4">
@@ -142,7 +142,7 @@ const About = () => {
           {features.map((feature, index) => (
             <Card key={index} className="bg-white border-0 shadow-md hover:shadow-lg transition-shadow duration-300">
               <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 mx-auto mb-4 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600">
+                <div className={`w-12 h-12 mx-auto mb-4 ${index % 2 === 0 ? 'bg-blue-100 text-brand-blue' : 'bg-green-100 text-brand-green'} rounded-xl flex items-center justify-center`}>
                   {getIcon(feature.icon)}
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">{feature.title}</h4>

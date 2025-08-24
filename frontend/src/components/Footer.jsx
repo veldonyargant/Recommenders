@@ -53,7 +53,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('#services')}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
                 >
                   Nettoyage Résidentiel
                 </button>
@@ -61,7 +61,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('#services')}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   Nettoyage Commercial
                 </button>
@@ -69,7 +69,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('#services')}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
                 >
                   Nettoyage Après Travaux
                 </button>
@@ -77,7 +77,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('#services')}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   Assainissement
                 </button>
@@ -92,7 +92,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('#accueil')}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
                 >
                   Accueil
                 </button>
@@ -100,7 +100,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('#apropos')}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   À Propos
                 </button>
@@ -108,7 +108,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('#temoignages')}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  className="text-gray-300 hover:text-blue-400 transition-colors"
                 >
                   Témoignages
                 </button>
@@ -116,7 +116,7 @@ const Footer = () => {
               <li>
                 <button 
                   onClick={() => scrollToSection('#contact')}
-                  className="text-gray-300 hover:text-emerald-400 transition-colors"
+                  className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   Contact
                 </button>
@@ -129,22 +129,22 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-6">Contact</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-emerald-400 mt-1 flex-shrink-0" />
+                <MapPin className="h-4 w-4 text-blue-400 mt-1 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">{contactInfo.address}</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                <Phone className="h-4 w-4 text-green-400 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">{contactInfo.phone}</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                <Mail className="h-4 w-4 text-blue-400 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">{contactInfo.email}</span>
               </li>
             </ul>
 
             {/* Service Areas */}
             <div className="mt-6">
-              <h5 className="font-medium text-emerald-400 mb-2">Zones de Service</h5>
+              <h5 className="font-medium text-blue-400 mb-2">Zones de Service</h5>
               <div className="text-sm text-gray-300">
                 {companyInfo.serviceAreas.join(' • ')}
               </div>
@@ -162,11 +162,11 @@ const Footer = () => {
             </div>
             
             <div className="flex items-center gap-6 text-sm">
-              <div className="flex items-center gap-2 text-emerald-400">
+              <div className="flex items-center gap-2 text-blue-400">
                 <CheckCircle className="h-4 w-4" />
                 <span>Entreprise locale certifiée</span>
               </div>
-              <div className="flex items-center gap-2 text-emerald-400">
+              <div className="flex items-center gap-2 text-green-400">
                 <CheckCircle className="h-4 w-4" />
                 <span>Produits écologiques</span>
               </div>
