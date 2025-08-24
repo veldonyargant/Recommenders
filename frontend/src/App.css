@@ -13,6 +13,52 @@ html {
   background-image: url("data:image/svg+xml,%3csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23e2e8f0' fill-opacity='0.4' fill-rule='evenodd'%3e%3ccircle cx='3' cy='3' r='3'/%3e%3ccircle cx='13' cy='13' r='3'/%3e%3c/g%3e%3c/svg%3e");
 }
 
+/* Custom brand colors matching Spacio+ logo */
+:root {
+  --brand-blue-primary: #2563eb;    /* Logo blue */
+  --brand-blue-light: #3b82f6;
+  --brand-blue-dark: #1d4ed8;
+  --brand-green-primary: #16a34a;   /* Logo green */
+  --brand-green-light: #22c55e;
+  --brand-green-dark: #15803d;
+  --brand-gradient-primary: linear-gradient(135deg, #2563eb, #16a34a);
+  --brand-gradient-hover: linear-gradient(135deg, #1d4ed8, #15803d);
+  --brand-gradient-light: linear-gradient(135deg, #dbeafe, #dcfce7);
+}
+
+/* Brand gradient classes */
+.bg-brand-gradient {
+  background: var(--brand-gradient-primary);
+}
+
+.bg-brand-gradient:hover {
+  background: var(--brand-gradient-hover);
+}
+
+.bg-brand-blue {
+  background-color: var(--brand-blue-primary);
+}
+
+.bg-brand-green {
+  background-color: var(--brand-green-primary);
+}
+
+.text-brand-blue {
+  color: var(--brand-blue-primary);
+}
+
+.text-brand-green {
+  color: var(--brand-green-primary);
+}
+
+.border-brand-blue {
+  border-color: var(--brand-blue-primary);
+}
+
+.border-brand-green {
+  border-color: var(--brand-green-primary);
+}
+
 /* Custom animations */
 @keyframes float {
   0% { transform: translateY(0px); }
@@ -24,9 +70,9 @@ html {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Gradient text */
+/* Gradient text matching logo */
 .gradient-text {
-  background: linear-gradient(135deg, #10b981, #0d9488);
+  background: var(--brand-gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -39,18 +85,18 @@ html {
 
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1), 0 10px 10px -5px rgba(37, 99, 235, 0.04);
 }
 
-/* Button animations */
+/* Button animations with brand colors */
 .btn-pulse:hover {
   animation: pulse 1s infinite;
 }
 
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
 }
 
 /* Smooth transitions for interactive elements */
@@ -64,17 +110,17 @@ button, a, .interactive {
   -webkit-backdrop-filter: blur(16px);
 }
 
-/* Focus states for accessibility */
+/* Focus states for accessibility with brand colors */
 button:focus-visible, 
 a:focus-visible, 
 input:focus-visible, 
 textarea:focus-visible, 
 select:focus-visible {
-  outline: 2px solid #10b981;
+  outline: 2px solid var(--brand-blue-primary);
   outline-offset: 2px;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar with brand colors */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -84,12 +130,12 @@ select:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #10b981;
+  background: var(--brand-blue-primary);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #059669;
+  background: var(--brand-blue-dark);
 }
 
 /* Loading animation for forms */
