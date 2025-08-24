@@ -48,14 +48,12 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-2xl px-3 py-2 rounded-lg">
-              S+
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">{companyInfo.name}</h1>
-              <p className="text-sm text-gray-600">{companyInfo.tagline}</p>
-            </div>
+          <div className="flex items-center space-x-3">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_sparkle-homes/artifacts/qvt2i9j6_Spatio%2B%20%284%29.png" 
+              alt="Spacio+ Logo" 
+              className="h-12 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation */}
