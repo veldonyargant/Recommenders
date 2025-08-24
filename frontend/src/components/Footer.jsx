@@ -17,14 +17,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold text-2xl px-3 py-2 rounded-lg">
-                S+
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">{companyInfo.name}</h3>
-                <p className="text-gray-400 text-sm">{companyInfo.tagline}</p>
-              </div>
+            <div className="flex items-center space-x-3 mb-6">
+              <img 
+                src="https://customer-assets.emergentagent.com/job_sparkle-homes/artifacts/qvt2i9j6_Spatio%2B%20%284%29.png" 
+                alt="Spacio+ Logo" 
+                className="h-10 w-auto"
+              />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
               Service de nettoyage professionnel dans la région Ottawa-Gatineau. 
