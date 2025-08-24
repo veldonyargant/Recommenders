@@ -80,7 +80,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
                 size="lg"
-                className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-brand-gradient hover:bg-brand-gradient text-white font-semibold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                 onClick={() => scrollToSection('#contact')}
               >
                 Obtenir un Devis Gratuit
@@ -88,7 +88,7 @@ const Hero = () => {
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-semibold px-8 py-4 text-lg"
+                className="border-2 border-brand-blue text-brand-blue hover:bg-blue-50 font-semibold px-8 py-4 text-lg"
                 onClick={() => scrollToSection('#services')}
               >
                 Découvrir nos Services
