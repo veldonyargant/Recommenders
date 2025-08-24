@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
       {/* Top bar */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-2">
+      <div className="bg-brand-gradient text-white py-2">
         <div className="container mx-auto px-4 flex justify-between items-center text-sm">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
