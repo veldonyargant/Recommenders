@@ -25,7 +25,7 @@ const Hero = () => {
           <div className="space-y-8">
             {/* Badge */}
             <div className="flex items-center gap-2">
-              <Badge className="bg-emerald-100 text-emerald-800 hover:bg-emerald-100 px-3 py-1">
+              <Badge className="bg-blue-100 text-brand-blue hover:bg-blue-100 px-3 py-1">
                 <Star className="h-3 w-3 mr-1" />
                 Service de qualité supérieure
               </Badge>
