@@ -72,7 +72,7 @@ const Header = () => {
           {/* CTA Button & Mobile Menu */}
           <div className="flex items-center gap-4">
             <Button 
-              className="hidden md:flex bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium px-6"
+              className="hidden md:flex bg-brand-gradient hover:bg-brand-gradient text-white font-medium px-6 transition-all duration-300"
               onClick={() => scrollToSection('#contact')}
             >
               Devis Gratuit
