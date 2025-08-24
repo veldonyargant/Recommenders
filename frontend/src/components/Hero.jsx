@@ -51,19 +51,19 @@ const Hero = () => {
             {/* Features */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-emerald-600 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-brand-green flex-shrink-0" />
                 <span className="text-gray-700 font-medium">Devis gratuit 24h</span>
               </div>
               <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-emerald-600 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-brand-green flex-shrink-0" />
                 <span className="text-gray-700 font-medium">Produits écologiques</span>
               </div>
               <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-emerald-600 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-brand-green flex-shrink-0" />
                 <span className="text-gray-700 font-medium">Équipe assurée</span>
               </div>
               <div className="flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-emerald-600 flex-shrink-0" />
+                <CheckCircle className="h-5 w-5 text-brand-green flex-shrink-0" />
                 <span className="text-gray-700 font-medium">Service bilingue</span>
               </div>
             </div>
