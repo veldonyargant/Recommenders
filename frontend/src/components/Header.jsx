@@ -97,7 +97,7 @@ const Header = () => {
                     </button>
                   ))}
                   <Button 
-                    className="mt-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white"
+                    className="mt-4 bg-brand-gradient text-white"
                     onClick={() => scrollToSection('#contact')}
                   >
                     Devis Gratuit
