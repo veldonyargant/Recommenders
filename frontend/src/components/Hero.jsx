@@ -36,7 +36,7 @@ const Hero = () => {
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
                 <span className="text-gray-900">Votre espace</span>
                 <br />
-                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">
                   impeccable
                 </span>
                 <br />
