@@ -117,9 +117,11 @@ const Hero = () => {
             <div className="bg-white rounded-2xl shadow-2xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
               <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl p-6 h-96 flex items-center justify-center">
                 <div className="text-center space-y-4">
-                  <div className="w-24 h-24 mx-auto bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full flex items-center justify-center">
-                    <span className="text-3xl font-bold text-white">S+</span>
-                  </div>
+                  <img 
+                    src="https://customer-assets.emergentagent.com/job_sparkle-homes/artifacts/qvt2i9j6_Spatio%2B%20%284%29.png" 
+                    alt="Spacio+ Logo" 
+                    className="w-32 h-auto mx-auto"
+                  />
                   <h3 className="text-xl font-semibold text-gray-800">
                     Service Professionnel
                   </h3>
