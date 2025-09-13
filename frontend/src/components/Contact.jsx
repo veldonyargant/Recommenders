@@ -102,10 +102,29 @@ const Contact = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value, type, checked } = e.target;
+    
+    if (type === 'checkbox') {
+      // Handle multiple selection for typesPropriete
+      if (name === 'typesPropriete') {
+        setFormData(prev => ({
+          ...prev,
+          typesPropriete: checked 
+            ? [...prev.typesPropriete, value]
+            : prev.typesPropriete.filter(item => item !== value)
+        }));
+      } else {
+        setFormData(prev => ({
+          ...prev,
+          [name]: checked ? value : ''
+        }));
+      }
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   return (
