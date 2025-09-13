@@ -5,7 +5,8 @@ export const companyInfo = {
   tagline: "Des espaces impeccables, au meilleur prix",
   description: "Service de nettoyage résidentiel et commercial dans la région Ottawa-Gatineau",
   address: "15 Rue Jos-Montferrand, Gatineau, QC, J8X 0C2",
-  phone: "(819) 555-0123",
+  phone: "(873) 673-0232",
+  phoneAlt: "673-0036",
   email: "contact@spacioplus.ca",
   website: "www.spacioplus.ca",
   serviceAreas: ["Gatineau", "Hull", "Aylmer", "Chelsea", "Cantley", "Ottawa"]
