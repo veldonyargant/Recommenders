@@ -388,7 +388,7 @@ const Contact = () => {
                               className="mr-3 text-brand-blue focus:ring-brand-blue"
                               required
                             />
-                            <span className="text-sm text-gray-700">OUI | YES</span>
+                            <span className="text-sm text-gray-700">OUI</span>
                           </label>
                           <label className="flex items-center">
                             <input
@@ -401,7 +401,7 @@ const Contact = () => {
                               className="mr-3 text-brand-blue focus:ring-brand-blue"
                               required
                             />
-                            <span className="text-sm text-gray-700">NON | NO</span>
+                            <span className="text-sm text-gray-700">NON</span>
                           </label>
                         </div>
                       </div>
