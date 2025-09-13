@@ -19,7 +19,7 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
               <img 
-                src="https://customer-assets.emergentagent.com/job_sparkle-homes/artifacts/qvt2i9j6_Spatio%2B%20%284%29.png" 
+                src="https://customer-assets.emergentagent.com/job_sparkle-homes/artifacts/1v1x22yk_Spatio%2B%20%286%29%20-%20Copy.png" 
                 alt="Spacio+ Logo" 
                 className="h-10 w-auto"
               />
