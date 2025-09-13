@@ -30,41 +30,70 @@ api_router = APIRouter(prefix="/api")
 # Define Models for Spacio+ Contact System
 class ContactRequest(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    # Champs de base (obligatoires)
     nom: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
-    telephone: Optional[str] = Field(None, max_length=20)
-    typeService: str = Field(..., description="Type de service demandé")
-    superficie: Optional[str] = Field(None, description="Superficie approximative")
-    frequence: Optional[str] = Field(None, description="Fréquence souhaitée")
-    adresse: Optional[str] = Field(None, max_length=200, description="Adresse du service")
-    datePreferee: Optional[str] = Field(None, description="Date préférée pour le devis")
+    telephone: str = Field(..., min_length=10, max_length=20)
+    adresseFacturation: str = Field(..., min_length=10, max_length=200)
+    
+    # Service et fréquence
+    frequence: Optional[str] = Field(None, description="Fréquence du service")
+    typesPropriete: Optional[List[str]] = Field(default=[], description="Types de propriété (sélection multiple)")
+    superficie: Optional[str] = Field(None, max_length=50, description="Superficie en pieds carrés")
+    adresseService: str = Field(..., min_length=10, max_length=200, description="Adresse de la propriété à entretenir")
+    
+    # Détails spécifiques (obligatoires)
+    sallesBainCompletes: str = Field(..., description="Nombre de salles de bain complètes")
+    sallesDEau: str = Field(..., description="Nombre de salles d'eau")
+    inclueSousSol: str = Field(..., description="Inclure le sous-sol (oui/non)")
+    inclueNetoyageFenetres: Optional[str] = Field(None, description="Inclure nettoyage fenêtres (oui/non)")
+    
+    # Message optionnel
     message: Optional[str] = Field(None, max_length=1000)
+    
+    # Champs système
     dateCreation: datetime = Field(default_factory=datetime.utcnow)
     statut: str = Field(default="nouveau")
     notes: Optional[str] = Field(None, max_length=500)
 
-    @validator('typeService')
-    def validate_type_service(cls, v):
-        valid_services = ['residentiel', 'commercial', 'apres-travaux', 'assainissement']
-        if v not in valid_services:
-            raise ValueError(f'Type de service doit être un de: {", ".join(valid_services)}')
-        return v
-
-    @validator('superficie')
-    def validate_superficie(cls, v):
-        if v:
-            valid_superficies = ['petit', 'moyen', 'grand', 'tres-grand']
-            if v not in valid_superficies:
-                raise ValueError(f'Superficie doit être une de: {", ".join(valid_superficies)}')
-        return v
-
     @validator('frequence')
     def validate_frequence(cls, v):
         if v:
-            valid_frequences = ['ponctuel', 'hebdomadaire', 'bihebdomadaire', 'mensuel', 'sur-demande']
+            valid_frequences = ['une-fois', 'hebdomadaire', 'bihebdomadaire', 'mensuel', 'occasionnel', 'sur-appel']
             if v not in valid_frequences:
                 raise ValueError(f'Fréquence doit être une de: {", ".join(valid_frequences)}')
         return v
+
+    @validator('typesPropriete')
+    def validate_types_propriete(cls, v):
+        if v:
+            valid_types = ['appartement-condo', 'maison-unifamiliale', 'immeuble-logements', 'bureau-commercial', 'commerce-detail', 'garderie', 'autre']
+            for type_prop in v:
+                if type_prop not in valid_types:
+                    raise ValueError(f'Type de propriété invalide: {type_prop}')
+        return v
+
+    @validator('inclueSousSol')
+    def validate_inclue_sous_sol(cls, v):
+        if v not in ['oui', 'non']:
+            raise ValueError('Inclure sous-sol doit être "oui" ou "non"')
+        return v
+
+    @validator('inclueNetoyageFenetres')
+    def validate_inclue_nettoyage_fenetres(cls, v):
+        if v and v not in ['oui', 'non']:
+            raise ValueError('Inclure nettoyage fenêtres doit être "oui" ou "non"')
+        return v
+
+    @validator('sallesBainCompletes', 'sallesDEau')
+    def validate_nombres_salles(cls, v):
+        try:
+            num = int(v)
+            if num < 0:
+                raise ValueError('Le nombre ne peut pas être négatif')
+            return str(num)
+        except (ValueError, TypeError):
+            raise ValueError('Doit être un nombre valide')
 
     @validator('telephone')
     def validate_telephone(cls, v):
@@ -82,38 +111,65 @@ class ContactRequest(BaseModel):
         return v.strip().title()
 
 class ContactRequestCreate(BaseModel):
+    # Champs de base (obligatoires)
     nom: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
-    telephone: Optional[str] = Field(None, max_length=20)
-    typeService: str = Field(..., description="Type de service demandé")
-    superficie: Optional[str] = Field(None, description="Superficie approximative")
-    frequence: Optional[str] = Field(None, description="Fréquence souhaitée")
-    adresse: Optional[str] = Field(None, max_length=200, description="Adresse du service")
-    datePreferee: Optional[str] = Field(None, description="Date préférée pour le devis")
+    telephone: str = Field(..., min_length=10, max_length=20)
+    adresseFacturation: str = Field(..., min_length=10, max_length=200)
+    
+    # Service et fréquence
+    frequence: Optional[str] = Field(None, description="Fréquence du service")
+    typesPropriete: Optional[List[str]] = Field(default=[], description="Types de propriété (sélection multiple)")
+    superficie: Optional[str] = Field(None, max_length=50, description="Superficie en pieds carrés")
+    adresseService: str = Field(..., min_length=10, max_length=200, description="Adresse de la propriété à entretenir")
+    
+    # Détails spécifiques (obligatoires)
+    sallesBainCompletes: str = Field(..., description="Nombre de salles de bain complètes")
+    sallesDEau: str = Field(..., description="Nombre de salles d'eau")
+    inclueSousSol: str = Field(..., description="Inclure le sous-sol (oui/non)")
+    inclueNetoyageFenetres: Optional[str] = Field(None, description="Inclure nettoyage fenêtres (oui/non)")
+    
+    # Message optionnel
     message: Optional[str] = Field(None, max_length=1000)
-
-    @validator('typeService')
-    def validate_type_service(cls, v):
-        valid_services = ['residentiel', 'commercial', 'apres-travaux', 'assainissement']
-        if v not in valid_services:
-            raise ValueError(f'Type de service doit être un de: {", ".join(valid_services)}')
-        return v
-
-    @validator('superficie')
-    def validate_superficie(cls, v):
-        if v:
-            valid_superficies = ['petit', 'moyen', 'grand', 'tres-grand']
-            if v not in valid_superficies:
-                raise ValueError(f'Superficie doit être une de: {", ".join(valid_superficies)}')
-        return v
 
     @validator('frequence')
     def validate_frequence(cls, v):
         if v:
-            valid_frequences = ['ponctuel', 'hebdomadaire', 'bihebdomadaire', 'mensuel', 'sur-demande']
+            valid_frequences = ['une-fois', 'hebdomadaire', 'bihebdomadaire', 'mensuel', 'occasionnel', 'sur-appel']
             if v not in valid_frequences:
                 raise ValueError(f'Fréquence doit être une de: {", ".join(valid_frequences)}')
         return v
+
+    @validator('typesPropriete')
+    def validate_types_propriete(cls, v):
+        if v:
+            valid_types = ['appartement-condo', 'maison-unifamiliale', 'immeuble-logements', 'bureau-commercial', 'commerce-detail', 'garderie', 'autre']
+            for type_prop in v:
+                if type_prop not in valid_types:
+                    raise ValueError(f'Type de propriété invalide: {type_prop}')
+        return v
+
+    @validator('inclueSousSol')
+    def validate_inclue_sous_sol(cls, v):
+        if v not in ['oui', 'non']:
+            raise ValueError('Inclure sous-sol doit être "oui" ou "non"')
+        return v
+
+    @validator('inclueNetoyageFenetres')
+    def validate_inclue_nettoyage_fenetres(cls, v):
+        if v and v not in ['oui', 'non']:
+            raise ValueError('Inclure nettoyage fenêtres doit être "oui" ou "non"')
+        return v
+
+    @validator('sallesBainCompletes', 'sallesDEau')
+    def validate_nombres_salles(cls, v):
+        try:
+            num = int(v)
+            if num < 0:
+                raise ValueError('Le nombre ne peut pas être négatif')
+            return str(num)
+        except (ValueError, TypeError):
+            raise ValueError('Doit être un nombre valide')
 
     @validator('telephone')
     def validate_telephone(cls, v):
