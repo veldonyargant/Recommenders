@@ -34,6 +34,10 @@ class ContactRequest(BaseModel):
     email: EmailStr
     telephone: Optional[str] = Field(None, max_length=20)
     typeService: str = Field(..., description="Type de service demandé")
+    superficie: Optional[str] = Field(None, description="Superficie approximative")
+    frequence: Optional[str] = Field(None, description="Fréquence souhaitée")
+    adresse: Optional[str] = Field(None, max_length=200, description="Adresse du service")
+    datePreferee: Optional[str] = Field(None, description="Date préférée pour le devis")
     message: Optional[str] = Field(None, max_length=1000)
     dateCreation: datetime = Field(default_factory=datetime.utcnow)
     statut: str = Field(default="nouveau")
@@ -44,6 +48,22 @@ class ContactRequest(BaseModel):
         valid_services = ['residentiel', 'commercial', 'apres-travaux', 'assainissement']
         if v not in valid_services:
             raise ValueError(f'Type de service doit être un de: {", ".join(valid_services)}')
+        return v
+
+    @validator('superficie')
+    def validate_superficie(cls, v):
+        if v:
+            valid_superficies = ['petit', 'moyen', 'grand', 'tres-grand']
+            if v not in valid_superficies:
+                raise ValueError(f'Superficie doit être une de: {", ".join(valid_superficies)}')
+        return v
+
+    @validator('frequence')
+    def validate_frequence(cls, v):
+        if v:
+            valid_frequences = ['ponctuel', 'hebdomadaire', 'bihebdomadaire', 'mensuel', 'sur-demande']
+            if v not in valid_frequences:
+                raise ValueError(f'Fréquence doit être une de: {", ".join(valid_frequences)}')
         return v
 
     @validator('telephone')
@@ -66,6 +86,10 @@ class ContactRequestCreate(BaseModel):
     email: EmailStr
     telephone: Optional[str] = Field(None, max_length=20)
     typeService: str = Field(..., description="Type de service demandé")
+    superficie: Optional[str] = Field(None, description="Superficie approximative")
+    frequence: Optional[str] = Field(None, description="Fréquence souhaitée")
+    adresse: Optional[str] = Field(None, max_length=200, description="Adresse du service")
+    datePreferee: Optional[str] = Field(None, description="Date préférée pour le devis")
     message: Optional[str] = Field(None, max_length=1000)
 
     @validator('typeService')
@@ -73,6 +97,22 @@ class ContactRequestCreate(BaseModel):
         valid_services = ['residentiel', 'commercial', 'apres-travaux', 'assainissement']
         if v not in valid_services:
             raise ValueError(f'Type de service doit être un de: {", ".join(valid_services)}')
+        return v
+
+    @validator('superficie')
+    def validate_superficie(cls, v):
+        if v:
+            valid_superficies = ['petit', 'moyen', 'grand', 'tres-grand']
+            if v not in valid_superficies:
+                raise ValueError(f'Superficie doit être une de: {", ".join(valid_superficies)}')
+        return v
+
+    @validator('frequence')
+    def validate_frequence(cls, v):
+        if v:
+            valid_frequences = ['ponctuel', 'hebdomadaire', 'bihebdomadaire', 'mensuel', 'sur-demande']
+            if v not in valid_frequences:
+                raise ValueError(f'Fréquence doit être une de: {", ".join(valid_frequences)}')
         return v
 
     @validator('telephone')
