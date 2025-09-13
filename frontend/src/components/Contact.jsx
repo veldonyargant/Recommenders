@@ -246,12 +246,12 @@ const Contact = () => {
                       </label>
                       <div className="space-y-2">
                         {[
-                          { value: 'une-fois', label: 'Une seule fois - One-time service' },
-                          { value: 'hebdomadaire', label: 'À la semaine - Weekly' },
-                          { value: 'bihebdomadaire', label: 'Bihebdomadaire (toutes les 2 semaines) - Bi-weekly' },
-                          { value: 'mensuel', label: 'Mensuel - Monthly' },
-                          { value: 'occasionnel', label: 'Occasionnel / Selon vos besoins - As needed' },
-                          { value: 'sur-appel', label: 'Sur appel - On call' }
+                          { value: 'une-fois', label: 'Une seule fois' },
+                          { value: 'hebdomadaire', label: 'À la semaine' },
+                          { value: 'bihebdomadaire', label: 'Bihebdomadaire (toutes les 2 semaines)' },
+                          { value: 'mensuel', label: 'Mensuel' },
+                          { value: 'occasionnel', label: 'Occasionnel / Selon vos besoins' },
+                          { value: 'sur-appel', label: 'Sur appel' }
                         ].map((option) => (
                           <label key={option.value} className="flex items-center">
                             <input
