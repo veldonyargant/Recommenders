@@ -25,19 +25,19 @@ const Contact = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    // Champs de base
+    // Champs de base (obligatoires)
     nom: '',
     email: '',
     telephone: '',
     adresseFacturation: '',
     
-    // Type de service et fréquence  
+    // Fréquence et types de service
     frequence: '',
     typesPropriete: [], // Multiple sélection
     superficie: '',
     adresseService: '',
     
-    // Détails spécifiques
+    // Détails spécifiques (obligatoires)
     sallesBainCompletes: '',
     sallesDEau: '',
     inclueSousSol: '',
@@ -131,17 +131,22 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-16">
           <Badge className="bg-blue-100 text-brand-blue hover:bg-blue-100 mb-4">
-            Contactez-nous
+            Demande de Devis Personnalisé
           </Badge>
           <h2 className="text-4xl font-bold text-gray-900 mb-6">
             Obtenez votre devis gratuit en 24h
           </h2>
-          <p className="text-xl text-gray-600">
-            Prêt à transformer vos espaces ? Contactez-nous dès aujourd'hui pour une 
-            évaluation gratuite et personnalisée de vos besoins de nettoyage.
-          </p>
+          <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100 mb-8">
+            <p className="text-lg text-gray-700 mb-4">
+              <strong>Merci de l'intérêt que vous portez à Spacio+.</strong> Notre mission est de rendre vos espaces plus propres, plus sains et plus agréables à vivre ou à travailler.
+            </p>
+            <p className="text-gray-600">
+              Ce formulaire a pour but de mieux comprendre vos besoins afin de vous offrir une soumission précise, adaptée et transparente. 
+              Notre équipe s'engage à vous répondre rapidement avec une estimation claire et personnalisée.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -151,179 +156,316 @@ const Contact = () => {
               <CardHeader>
                 <CardTitle className="text-2xl text-gray-900 flex items-center gap-2">
                   <MessageSquare className="h-6 w-6 text-brand-blue" />
-                  Demande de Devis Gratuit
+                  Formulaire de Demande de Devis
                 </CardTitle>
                 <p className="text-gray-600">
-                  Remplissez le formulaire ci-dessous et nous vous répondrons rapidement
+                  <span className="text-red-500">*</span> Indique une question obligatoire
                 </p>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Nom complet *
-                      </label>
-                      <Input
-                        type="text"
-                        name="nom"
-                        value={formData.nom}
-                        onChange={handleChange}
-                        placeholder="Votre nom et prénom"
-                        required
-                        disabled={loading}
-                        className="border-gray-200 focus:border-brand-blue"
-                      />
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  
+                  {/* Section 1: Informations de base */}
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Informations de Contact</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Nom complet <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          type="text"
+                          name="nom"
+                          value={formData.nom}
+                          onChange={handleChange}
+                          placeholder="Votre nom complet"
+                          required
+                          disabled={loading}
+                          className="border-gray-200 focus:border-brand-blue"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Courriel <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="votre@email.com"
+                          required
+                          disabled={loading}
+                          className="border-gray-200 focus:border-brand-blue"
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
-                      </label>
-                      <Input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="votre@email.com"
-                        required
-                        disabled={loading}
-                        className="border-gray-200 focus:border-brand-blue"
-                      />
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Téléphone <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          type="tel"
+                          name="telephone"
+                          value={formData.telephone}
+                          onChange={handleChange}
+                          placeholder="(819) 555-0123"
+                          required
+                          disabled={loading}
+                          className="border-gray-200 focus:border-brand-blue"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Adresse de facturation <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          type="text"
+                          name="adresseFacturation"
+                          value={formData.adresseFacturation}
+                          onChange={handleChange}
+                          placeholder="Votre adresse de facturation"
+                          required
+                          disabled={loading}
+                          className="border-gray-200 focus:border-brand-blue"
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Téléphone
+                  {/* Section 2: Type de service */}
+                  <div className="bg-blue-50 p-6 rounded-lg">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Service Souhaité</h3>
+                    
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        À quelle régularité souhaitez-vous bénéficier de nos services ?
                       </label>
-                      <Input
-                        type="tel"
-                        name="telephone"
-                        value={formData.telephone}
-                        onChange={handleChange}
-                        placeholder="(819) 555-0123"
-                        disabled={loading}
-                        className="border-gray-200 focus:border-brand-blue"
-                      />
+                      <div className="space-y-2">
+                        {[
+                          { value: 'une-fois', label: 'Une seule fois - One-time service' },
+                          { value: 'hebdomadaire', label: 'À la semaine - Weekly' },
+                          { value: 'bihebdomadaire', label: 'Bihebdomadaire (toutes les 2 semaines) - Bi-weekly' },
+                          { value: 'mensuel', label: 'Mensuel - Monthly' },
+                          { value: 'occasionnel', label: 'Occasionnel / Selon vos besoins - As needed' },
+                          { value: 'sur-appel', label: 'Sur appel - On call' }
+                        ].map((option) => (
+                          <label key={option.value} className="flex items-center">
+                            <input
+                              type="radio"
+                              name="frequence"
+                              value={option.value}
+                              checked={formData.frequence === option.value}
+                              onChange={handleChange}
+                              disabled={loading}
+                              className="mr-3 text-brand-blue focus:ring-brand-blue"
+                            />
+                            <span className="text-sm text-gray-700">{option.label}</span>
+                          </label>
+                        ))}
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Type de service *
+
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        Quel type de propriété souhaitez-vous faire entretenir ? (Sélectionnez tout ce qui s'applique)
                       </label>
-                      <select
-                        name="typeService"
-                        value={formData.typeService}
-                        onChange={handleChange}
-                        required
-                        disabled={loading}
-                        className="w-full p-3 border border-gray-200 rounded-md focus:border-brand-blue focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <option value="">Sélectionnez un service</option>
-                        <option value="residentiel">Nettoyage Résidentiel</option>
-                        <option value="commercial">Nettoyage Commercial</option>
-                        <option value="apres-travaux">Après Travaux</option>
-                        <option value="assainissement">Assainissement</option>
-                      </select>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'appartement-condo', label: 'Appartement / Condo' },
+                          { value: 'maison-unifamiliale', label: 'Maison unifamiliale' },
+                          { value: 'immeuble-logements', label: 'Immeuble à logements' },
+                          { value: 'bureau-commercial', label: 'Bureau / Espace commercial' },
+                          { value: 'commerce-detail', label: 'Commerce de détail' },
+                          { value: 'garderie', label: 'Garderie éducative' },
+                          { value: 'autre', label: 'Autre' }
+                        ].map((option) => (
+                          <label key={option.value} className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="typesPropriete"
+                              value={option.value}
+                              checked={formData.typesPropriete.includes(option.value)}
+                              onChange={handleChange}
+                              disabled={loading}
+                              className="mr-3 text-brand-blue focus:ring-brand-blue"
+                            />
+                            <span className="text-sm text-gray-700">{option.label}</span>
+                          </label>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Adresse du service
-                      </label>
-                      <Input
-                        type="text"
-                        name="adresse"
-                        value={formData.adresse}
-                        onChange={handleChange}
-                        placeholder="Adresse complète"
-                        disabled={loading}
-                        className="border-gray-200 focus:border-brand-blue"
-                      />
+                  {/* Section 3: Détails de la propriété */}
+                  <div className="bg-green-50 p-6 rounded-lg">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Détails de la Propriété</h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Superficie approximative (pieds carrés)
+                        </label>
+                        <Input
+                          type="text"
+                          name="superficie"
+                          value={formData.superficie}
+                          onChange={handleChange}
+                          placeholder="ex: 1200 pi²"
+                          disabled={loading}
+                          className="border-gray-200 focus:border-brand-blue"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Adresse complète de la propriété à entretenir <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          type="text"
+                          name="adresseService"
+                          value={formData.adresseService}
+                          onChange={handleChange}
+                          placeholder="Adresse complète du service"
+                          required
+                          disabled={loading}
+                          className="border-gray-200 focus:border-brand-blue"
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Superficie approximative
-                      </label>
-                      <select
-                        name="superficie"
-                        value={formData.superficie}
-                        onChange={handleChange}
-                        disabled={loading}
-                        className="w-full p-3 border border-gray-200 rounded-md focus:border-brand-blue focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <option value="">Sélectionnez</option>
-                        <option value="petit">Petit (moins de 1000 pi²)</option>
-                        <option value="moyen">Moyen (1000-2500 pi²)</option>
-                        <option value="grand">Grand (2500-5000 pi²)</option>
-                        <option value="tres-grand">Très grand (plus de 5000 pi²)</option>
-                      </select>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Nombre de salles de bain complètes <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          type="number"
+                          name="sallesBainCompletes"
+                          value={formData.sallesBainCompletes}
+                          onChange={handleChange}
+                          placeholder="0"
+                          min="0"
+                          required
+                          disabled={loading}
+                          className="border-gray-200 focus:border-brand-blue"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Nombre de salles d'eau (toilettes seulement) <span className="text-red-500">*</span>
+                        </label>
+                        <Input
+                          type="number"
+                          name="sallesDEau"
+                          value={formData.sallesDEau}
+                          onChange={handleChange}
+                          placeholder="0"
+                          min="0"
+                          required
+                          disabled={loading}
+                          className="border-gray-200 focus:border-brand-blue"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-3">
+                          Inclure le sous-sol dans l'entretien ? <span className="text-red-500">*</span>
+                        </label>
+                        <div className="space-y-2">
+                          <label className="flex items-center">
+                            <input
+                              type="radio"
+                              name="inclueSousSol"
+                              value="oui"
+                              checked={formData.inclueSousSol === 'oui'}
+                              onChange={handleChange}
+                              disabled={loading}
+                              className="mr-3 text-brand-blue focus:ring-brand-blue"
+                              required
+                            />
+                            <span className="text-sm text-gray-700">OUI | YES</span>
+                          </label>
+                          <label className="flex items-center">
+                            <input
+                              type="radio"
+                              name="inclueSousSol"
+                              value="non"
+                              checked={formData.inclueSousSol === 'non'}
+                              onChange={handleChange}
+                              disabled={loading}
+                              className="mr-3 text-brand-blue focus:ring-brand-blue"
+                              required
+                            />
+                            <span className="text-sm text-gray-700">NON | NO</span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-3">
+                          Inclure le nettoyage des fenêtres ?
+                        </label>
+                        <div className="space-y-2">
+                          <label className="flex items-center">
+                            <input
+                              type="radio"
+                              name="inclueNetoyageFenetres"
+                              value="oui"
+                              checked={formData.inclueNetoyageFenetres === 'oui'}
+                              onChange={handleChange}
+                              disabled={loading}
+                              className="mr-3 text-brand-blue focus:ring-brand-blue"
+                            />
+                            <span className="text-sm text-gray-700">OUI | YES</span>
+                          </label>
+                          <label className="flex items-center">
+                            <input
+                              type="radio"
+                              name="inclueNetoyageFenetres"
+                              value="non"
+                              checked={formData.inclueNetoyageFenetres === 'non'}
+                              onChange={handleChange}
+                              disabled={loading}
+                              className="mr-3 text-brand-blue focus:ring-brand-blue"
+                            />
+                            <span className="text-sm text-gray-700">NON | NO</span>
+                          </label>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Fréquence souhaitée
-                      </label>
-                      <select
-                        name="frequence"
-                        value={formData.frequence}
-                        onChange={handleChange}
-                        disabled={loading}
-                        className="w-full p-3 border border-gray-200 rounded-md focus:border-brand-blue focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <option value="">Sélectionnez</option>
-                        <option value="ponctuel">Ponctuel (une fois)</option>
-                        <option value="hebdomadaire">Hebdomadaire</option>
-                        <option value="bihebdomadaire">Aux 2 semaines</option>
-                        <option value="mensuel">Mensuel</option>
-                        <option value="sur-demande">Sur demande</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Date préférée pour le devis
-                      </label>
-                      <Input
-                        type="date"
-                        name="datePreferee"
-                        value={formData.datePreferee}
-                        onChange={handleChange}
-                        disabled={loading}
-                        min={new Date().toISOString().split('T')[0]}
-                        className="border-gray-200 focus:border-brand-blue"
-                      />
-                    </div>
-                  </div>
-
+                  {/* Section 4: Message optionnel */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Détails supplémentaires
+                      Détails supplémentaires (optionnel)
                     </label>
                     <Textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Décrivez vos besoins spécifiques : nombre de pièces, surfaces particulières, exigences spéciales, animaux domestiques, etc."
+                      placeholder="Ajoutez ici toute information supplémentaire qui pourrait nous aider à mieux comprendre vos besoins..."
                       rows={4}
                       disabled={loading}
                       className="border-gray-200 focus:border-brand-blue"
                     />
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
-                    <CheckCircle className="h-4 w-4 text-brand-green flex-shrink-0" />
-                    <span>Réponse garantie sous 24h • Devis gratuit • Sans engagement</span>
+                  <div className="flex items-center gap-2 text-sm text-gray-600 bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <CheckCircle className="h-5 w-5 text-brand-green flex-shrink-0" />
+                    <span><strong>Réponse garantie sous 24h</strong> • Devis gratuit • Sans engagement • Votre satisfaction est notre priorité</span>
                   </div>
 
                   <Button 
                     type="submit" 
                     size="lg"
                     disabled={loading}
-                    className="w-full bg-brand-gradient hover:bg-brand-gradient text-white font-semibold py-4 hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    className="w-full bg-brand-gradient hover:bg-brand-gradient text-white font-semibold py-4 text-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
                     {loading ? (
                       <>
@@ -331,7 +473,7 @@ const Contact = () => {
                         Envoi en cours...
                       </>
                     ) : (
-                      'Envoyer ma Demande'
+                      'Envoyer ma Demande de Devis'
                     )}
                   </Button>
                 </form>
@@ -438,4 +580,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
