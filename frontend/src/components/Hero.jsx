@@ -118,7 +118,7 @@ const Hero = () => {
               <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl p-6 h-96 flex items-center justify-center">
                 <div className="text-center space-y-4">
                   <img 
-                    src="https://customer-assets.emergentagent.com/job_sparkle-homes/artifacts/qvt2i9j6_Spatio%2B%20%284%29.png" 
+                    src="https://customer-assets.emergentagent.com/job_sparkle-homes/artifacts/1v1x22yk_Spatio%2B%20%286%29%20-%20Copy.png" 
                     alt="Spacio+ Logo" 
                     className="w-32 h-auto mx-auto"
                   />
