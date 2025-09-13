@@ -66,11 +66,15 @@ const Contact = () => {
           nom: '',
           email: '',
           telephone: '',
-          typeService: '',
-          superficie: '',
+          adresseFacturation: '',
           frequence: '',
-          adresse: '',
-          datePreferee: '',
+          typesPropriete: [],
+          superficie: '',
+          adresseService: '',
+          sallesBainCompletes: '',
+          sallesDEau: '',
+          inclueSousSol: '',
+          inclueNetoyageFenetres: '',
           message: ''
         });
       } else {
