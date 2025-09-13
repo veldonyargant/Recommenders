@@ -29,6 +29,10 @@ const Contact = () => {
     email: '',
     telephone: '',
     typeService: '',
+    superficie: '',
+    frequence: '',
+    adresse: '',
+    datePreferee: '',
     message: ''
   });
 
