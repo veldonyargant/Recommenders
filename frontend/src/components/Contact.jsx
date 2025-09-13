@@ -25,14 +25,25 @@ const Contact = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
+    // Champs de base
     nom: '',
     email: '',
     telephone: '',
-    typeService: '',
-    superficie: '',
+    adresseFacturation: '',
+    
+    // Type de service et fréquence  
     frequence: '',
-    adresse: '',
-    datePreferee: '',
+    typesPropriete: [], // Multiple sélection
+    superficie: '',
+    adresseService: '',
+    
+    // Détails spécifiques
+    sallesBainCompletes: '',
+    sallesDEau: '',
+    inclueSousSol: '',
+    inclueNetoyageFenetres: '',
+    
+    // Message optionnel
     message: ''
   });
 
