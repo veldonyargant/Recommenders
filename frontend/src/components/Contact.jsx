@@ -194,15 +194,86 @@ const Contact = () => {
                     </div>
                   </div>
 
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Adresse du service
+                      </label>
+                      <Input
+                        type="text"
+                        name="adresse"
+                        value={formData.adresse}
+                        onChange={handleChange}
+                        placeholder="Adresse complète"
+                        disabled={loading}
+                        className="border-gray-200 focus:border-brand-blue"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Superficie approximative
+                      </label>
+                      <select
+                        name="superficie"
+                        value={formData.superficie}
+                        onChange={handleChange}
+                        disabled={loading}
+                        className="w-full p-3 border border-gray-200 rounded-md focus:border-brand-blue focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <option value="">Sélectionnez</option>
+                        <option value="petit">Petit (moins de 1000 pi²)</option>
+                        <option value="moyen">Moyen (1000-2500 pi²)</option>
+                        <option value="grand">Grand (2500-5000 pi²)</option>
+                        <option value="tres-grand">Très grand (plus de 5000 pi²)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Fréquence souhaitée
+                      </label>
+                      <select
+                        name="frequence"
+                        value={formData.frequence}
+                        onChange={handleChange}
+                        disabled={loading}
+                        className="w-full p-3 border border-gray-200 rounded-md focus:border-brand-blue focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <option value="">Sélectionnez</option>
+                        <option value="ponctuel">Ponctuel (une fois)</option>
+                        <option value="hebdomadaire">Hebdomadaire</option>
+                        <option value="bihebdomadaire">Aux 2 semaines</option>
+                        <option value="mensuel">Mensuel</option>
+                        <option value="sur-demande">Sur demande</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Date préférée pour le devis
+                      </label>
+                      <Input
+                        type="date"
+                        name="datePreferee"
+                        value={formData.datePreferee}
+                        onChange={handleChange}
+                        disabled={loading}
+                        min={new Date().toISOString().split('T')[0]}
+                        className="border-gray-200 focus:border-brand-blue"
+                      />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Décrivez vos besoins
+                      Détails supplémentaires
                     </label>
                     <Textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Décrivez votre projet : superficie, fréquence souhaitée, exigences particulières..."
+                      placeholder="Décrivez vos besoins spécifiques : nombre de pièces, surfaces particulières, exigences spéciales, animaux domestiques, etc."
                       rows={4}
                       disabled={loading}
                       className="border-gray-200 focus:border-brand-blue"
