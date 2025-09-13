@@ -221,9 +221,12 @@ async def create_contact_request(contact_data: ContactRequestCreate):
         result = await db.contact_requests.insert_one(contact_request.dict())
         
         if result.inserted_id:
+            # Envoyer les emails en arrière-plan
+            asyncio.create_task(send_notification_emails(contact_request.dict()))
+            
             return ContactResponse(
                 success=True,
-                message="Demande de contact envoyée avec succès! Nous vous répondrons dans les 24h.",
+                message="Demande de contact envoyée avec succès! Nous vous répondrons dans les 24h. Un email de confirmation vous a été envoyé.",
                 data={
                     "id": contact_request.id,
                     "nom": contact_request.nom,
@@ -242,6 +245,28 @@ async def create_contact_request(contact_data: ContactRequestCreate):
     except Exception as e:
         logging.error(f"Error creating contact request: {str(e)}")
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
+
+async def send_notification_emails(contact_data: dict):
+    """Envoie les emails de notification en arrière-plan"""
+    try:
+        # Email de confirmation au client
+        client_email_sent = email_service.send_client_confirmation(contact_data)
+        
+        # Email de notification à l'équipe
+        team_email_sent = email_service.send_team_notification(contact_data)
+        
+        if client_email_sent:
+            logging.info(f"Email de confirmation envoyé au client: {contact_data.get('email')}")
+        else:
+            logging.warning(f"Échec envoi email client: {contact_data.get('email')}")
+            
+        if team_email_sent:
+            logging.info(f"Email de notification envoyé à l'équipe: {email_service.notification_email}")
+        else:
+            logging.warning(f"Échec envoi email équipe: {email_service.notification_email}")
+            
+    except Exception as e:
+        logging.error(f"Erreur envoi emails: {str(e)}")
 
 @api_router.get("/contact", response_model=List[ContactRequest])
 async def get_contact_requests():
