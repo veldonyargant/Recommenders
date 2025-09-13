@@ -10,6 +10,10 @@ from typing import List, Optional
 import uuid
 from datetime import datetime
 import re
+import asyncio
+
+# Import du service email
+from email_service import email_service
 
 
 ROOT_DIR = Path(__file__).parent
