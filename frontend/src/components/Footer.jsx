@@ -74,14 +74,6 @@ const Footer = () => {
                   Nettoyage Après Travaux
                 </button>
               </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection('#services')}
-                  className="text-gray-300 hover:text-green-400 transition-colors"
-                >
-                  Assainissement
-                </button>
-              </li>
             </ul>
           </div>
 
