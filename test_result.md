@@ -174,9 +174,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "All backend tests completed successfully"
+    - "Email Configuration Setup"
+    - "CSV Export Functionality"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
