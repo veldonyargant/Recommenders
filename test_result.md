@@ -154,7 +154,17 @@ backend:
         - comment: "❌ SMTP credentials non configurées - besoin d'aide utilisateur pour configuration"
 
 frontend:
-  # Frontend testing not performed as per instructions
+  - task: "Admin Dashboard Display"
+    implemented: true
+    working: true
+    file: "frontend/src/components/AdminDashboard.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "✅ Dashboard admin affiche correctement 10 demandes avec interface utilisateur complète, recherche, statistiques et détails des contacts"
 
 metadata:
   created_by: "testing_agent"
