@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Tester le backend de Spacio+ avec les nouvelles modifications : nouveau logo, email changé vers contact@spacioplus.ca, zones de service mises à jour, formulaire de contact amélioré avec nouveaux champs"
+user_problem_statement: "Compléter l'implémentation des fonctionnalités manquantes de Spacio+ : mise à jour des numéros de téléphone, dashboard admin fonctionnel, configuration email, et export CSV"
 
 backend:
   - task: "API Root Endpoint Test"
