@@ -181,5 +181,5 @@ test_plan:
   test_priority: "high_first"
 
 agent_communication:
-    - agent: "testing"
-    - message: "Backend testing complet pour Spacio+ terminé avec succès. Tous les 22 tests sont passés (100% de réussite). L'API fonctionne parfaitement avec les nouvelles modifications: formulaire de contact amélioré, validation des nouveaux champs, sauvegarde en MongoDB, et récupération des statistiques. Aucun problème critique détecté."
+    - agent: "main"
+    - message: "Phase 1 & 2 complétées: Numéros téléphone vérifiés, Dashboard admin fonctionnel avec 10 demandes affichées. Reste à configurer SMTP et tester l'export CSV. Backend solide, admin dashboard excellent."
