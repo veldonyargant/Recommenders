@@ -273,7 +273,27 @@ async def get_contact_requests():
     """Récupérer toutes les demandes de contact (pour usage administratif)"""
     try:
         contacts = await db.contact_requests.find().sort("dateCreation", -1).to_list(100)
-        return [ContactRequest(**contact) for contact in contacts]
+        
+        # Convert contacts and provide default values for missing fields
+        result = []
+        for contact in contacts:
+            # Provide default values for new required fields if they don't exist
+            if 'adresseFacturation' not in contact:
+                contact['adresseFacturation'] = contact.get('adresse', 'Non spécifiée')
+            if 'adresseService' not in contact:
+                contact['adresseService'] = contact.get('adresse', 'Non spécifiée')
+            if 'sallesBainCompletes' not in contact:
+                contact['sallesBainCompletes'] = '0'
+            if 'sallesDEau' not in contact:
+                contact['sallesDEau'] = '0'
+            if 'inclueSousSol' not in contact:
+                contact['inclueSousSol'] = 'non'
+            if 'telephone' not in contact or contact['telephone'] is None:
+                contact['telephone'] = 'Non spécifié'
+                
+            result.append(ContactRequest(**contact))
+        
+        return result
     except Exception as e:
         logging.error(f"Error fetching contact requests: {str(e)}")
         raise HTTPException(status_code=500, detail="Erreur lors de la récupération des données")
