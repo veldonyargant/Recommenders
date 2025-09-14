@@ -11,7 +11,7 @@ from datetime import datetime
 import time
 
 # Backend URL from frontend/.env
-BASE_URL = "https://sparkle-homes.preview.emergentagent.com/api"
+BASE_URL = "https://spacioplus-web.preview.emergentagent.com/api"
 
 class SpacioTestSuite:
     def __init__(self):
