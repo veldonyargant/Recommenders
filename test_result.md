@@ -105,7 +105,7 @@
 user_problem_statement: "Compléter l'implémentation des fonctionnalités manquantes de Spacio+ : mise à jour des numéros de téléphone, dashboard admin fonctionnel, configuration email, et export CSV"
 
 backend:
-  - task: "API Root Endpoint Test"
+  - task: "Admin Dashboard API Endpoints"
     implemented: true
     working: true
     file: "backend/server.py"
@@ -114,80 +114,44 @@ backend:
     needs_retesting: false
     status_history:
         - working: true
-        - agent: "testing"
-        - comment: "✅ GET /api/ répond correctement avec message 'Spacio+ API - Service de nettoyage professionnel'"
+        - agent: "main"
+        - comment: "✅ Dashboard admin fonctionne correctement avec 10 demandes affichées. Les endpoints /api/contact et /api/contact/stats répondent bien."
 
-  - task: "Contact Form Required Fields Validation"
+  - task: "Phone Numbers Update"
     implemented: true
     working: true
-    file: "backend/server.py"
+    file: "frontend/src/data/mock.js"
     stuck_count: 0
-    priority: "high"
+    priority: "medium"
     needs_retesting: false
     status_history:
         - working: true
-        - agent: "testing"
-        - comment: "✅ Validation des champs requis (nom, email, typeService) fonctionne correctement. Rejette les requêtes avec champs manquants et accepte les requêtes avec champs minimum requis"
+        - agent: "main"
+        - comment: "✅ Numéros de téléphone déjà corrects: (873) 673-0232 et 673-0036"
 
-  - task: "Contact Form Field Validation"
+  - task: "CSV Export Functionality"
     implemented: true
     working: true
-    file: "backend/server.py"
+    file: "frontend/src/components/AdminDashboard.jsx"
     stuck_count: 0
-    priority: "high"
-    needs_retesting: false
+    priority: "medium"
+    needs_retesting: true
     status_history:
         - working: true
-        - agent: "testing"
-        - comment: "✅ Validation des choix multiples fonctionne parfaitement: typeService (residentiel/commercial/apres-travaux/assainissement), superficie (petit/moyen/grand/tres-grand), frequence (ponctuel/hebdomadaire/bihebdomadaire/mensuel/sur-demande), format email et téléphone"
+        - agent: "main"
+        - comment: "✅ Fonction d'export CSV déjà implémentée dans le dashboard admin"
 
-  - task: "Complete Contact Form Submission"
-    implemented: true
-    working: true
-    file: "backend/server.py"
+  - task: "Email Configuration Setup"
+    implemented: false
+    working: false
+    file: "backend/.env"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        - working: true
-        - agent: "testing"
-        - comment: "✅ Formulaire complet avec tous les nouveaux champs accepté et sauvegardé: nom, email, telephone, typeService, superficie, frequence, adresse, datePreferee, message. Test avec données Marie Dubois réussi"
-
-  - task: "Contact Data Retrieval"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-        - agent: "testing"
-        - comment: "✅ GET /api/contact récupère correctement toutes les demandes de contact. Vérification de sauvegarde réussie - contact test trouvé dans la base de données"
-
-  - task: "Contact Statistics"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-        - agent: "testing"
-        - comment: "✅ GET /api/contact/stats retourne correctement les statistiques avec total_requests et répartition by_service. Structure de données conforme aux attentes"
-
-  - task: "All Service Types Support"
-    implemented: true
-    working: true
-    file: "backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-        - agent: "testing"
-        - comment: "✅ Tous les types de service sont supportés et validés correctement: residentiel, commercial, apres-travaux, assainissement"
+        - working: false
+        - agent: "main"
+        - comment: "❌ SMTP credentials non configurées - besoin d'aide utilisateur pour configuration"
 
 frontend:
   # Frontend testing not performed as per instructions
