@@ -70,7 +70,7 @@ class EmailService:
                     <h3>📞 Nous contacter :</h3>
                     <p>
                         <strong>Email :</strong> contact@spacioplus.ca<br>
-                        <strong>Téléphone :</strong> (819) 555-0123<br>
+                        <strong>Téléphone :</strong> (873) 673-0232 ou 673-0036<br>
                         <strong>Adresse :</strong> 15 Rue Jos-Montferrand, Gatineau, QC, J8X 0C2
                     </p>
                 </div>
