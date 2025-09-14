@@ -36,14 +36,6 @@ export const services = [
     features: ["Enlèvement poussière", "Nettoyage fenêtres", "Surfaces spécialisées", "Prêt à habiter"],
     price: "Devis personnalisé",
     icon: "HardHat"
-  },
-  {
-    id: 4,
-    title: "Assainissement",
-    description: "Services de désinfection et assainissement",
-    features: ["Désinfection complète", "Produits certifiés", "Normes sanitaires", "Intervention rapide"],
-    price: "Devis sur mesure",
-    icon: "Shield"
   }
 ];
 
