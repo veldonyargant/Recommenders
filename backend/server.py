@@ -277,11 +277,13 @@ async def get_contact_requests():
         # Convert contacts and provide default values for missing fields
         result = []
         for contact in contacts:
-            # Provide default values for new required fields if they don't exist
+            # Provide default values for new required fields if they don't exist or are None
+            default_address = contact.get('adresse') or 'Adresse non spécifiée'
+            
             if 'adresseFacturation' not in contact or contact['adresseFacturation'] is None:
-                contact['adresseFacturation'] = contact.get('adresse', 'Non spécifiée')
+                contact['adresseFacturation'] = default_address
             if 'adresseService' not in contact or contact['adresseService'] is None:
-                contact['adresseService'] = contact.get('adresse', 'Non spécifiée')
+                contact['adresseService'] = default_address
             if 'sallesBainCompletes' not in contact:
                 contact['sallesBainCompletes'] = '0'
             if 'sallesDEau' not in contact:
